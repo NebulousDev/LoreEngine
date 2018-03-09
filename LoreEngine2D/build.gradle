@@ -1,0 +1,50 @@
+apply plugin: 'java'
+
+import org.gradle.internal.os.OperatingSystem
+
+project.ext.lwjglVersion = "3.1.6"
+project.ext.jomlVersion = "1.9.8"
+
+switch ( OperatingSystem.current() ) {
+	case OperatingSystem.WINDOWS:
+		project.ext.lwjglNatives = "natives-windows"
+		break
+	case OperatingSystem.LINUX:
+		project.ext.lwjglNatives = "natives-linux"
+	break
+	case OperatingSystem.MAC_OS:
+		project.ext.lwjglNatives = "natives-macos"
+		break
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'resources' 
+        }
+    }
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	compile "org.lwjgl:lwjgl:$lwjglVersion"
+	compile "org.lwjgl:lwjgl-glfw:$lwjglVersion"
+	compile "org.lwjgl:lwjgl-jemalloc:$lwjglVersion"
+	compile "org.lwjgl:lwjgl-openal:$lwjglVersion"
+	compile "org.lwjgl:lwjgl-opencl:$lwjglVersion"
+	compile "org.lwjgl:lwjgl-opengl:$lwjglVersion"
+	compile "org.lwjgl:lwjgl-stb:$lwjglVersion"
+	compile "org.lwjgl:lwjgl-vulkan:$lwjglVersion"
+	compile "org.lwjgl:lwjgl:$lwjglVersion:$lwjglNatives"
+	compile "org.lwjgl:lwjgl-glfw:$lwjglVersion:$lwjglNatives"
+	compile "org.lwjgl:lwjgl-jemalloc:$lwjglVersion:$lwjglNatives"
+	compile "org.lwjgl:lwjgl-openal:$lwjglVersion:$lwjglNatives"
+	compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:$lwjglNatives"
+	compile "org.lwjgl:lwjgl-stb:$lwjglVersion:$lwjglNatives"
+	compile "org.joml:joml:${jomlVersion}"
+	compile 'com.github.NebulousDev:LoreMathLib:1.0.2b'
+}
