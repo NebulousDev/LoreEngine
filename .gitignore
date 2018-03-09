@@ -1,6 +1,17 @@
 # Compiled class file
 *.class
 
+# Eclipse
+metadata/
+.metadata/
+recommenders/
+.recomenders/
+*.project
+
+# Gradle
+gradle/
+build/
+
 # Log file
 *.log
 
