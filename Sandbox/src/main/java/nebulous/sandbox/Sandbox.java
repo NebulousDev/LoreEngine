@@ -1,7 +1,7 @@
 package nebulous.sandbox;
 
-import nebulous.core.game.Game;
-import nebulous.core.game.Window;
+import nebulous.loreEngine.core.game.Game;
+import nebulous.loreEngine.core.game.Window;
 
 public class Sandbox extends Game {
 
@@ -17,7 +17,7 @@ public class Sandbox extends Game {
 	@Override
 	public void onInit() {
 		window.center();
-		window.show();
+		
 	}
 
 	@Override

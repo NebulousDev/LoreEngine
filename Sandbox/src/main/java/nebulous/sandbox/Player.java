@@ -1,8 +1,8 @@
 package nebulous.sandbox;
 
-import nebulous.core.game.Game;
-import nebulous.core.game.Scene;
-import nebulous.core.game.Sprite;
+import nebulous.loreEngine.core.game.Game;
+import nebulous.loreEngine.core.game.Scene;
+import nebulous.loreEngine.core.game.Sprite;
 
 public class Player extends Sprite {
 	

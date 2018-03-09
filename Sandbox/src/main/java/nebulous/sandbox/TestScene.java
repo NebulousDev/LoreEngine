@@ -1,17 +1,17 @@
 package nebulous.sandbox;
 
 import lore.math.Vector2f;
-import nebulous.core.game.Game;
-import nebulous.core.game.MouseInteactionEvent;
-import nebulous.core.game.Scene;
-import nebulous.core.game.Sprite;
-import nebulous.core.game.StaticBackground;
-import nebulous.core.game.StaticForeground;
-import nebulous.core.game.UIButton;
-import nebulous.core.game.UIElement;
-import nebulous.core.game.UILayer;
-import nebulous.core.graphics.Texture;
-import nebulous.core.utils.Input;
+import nebulous.loreEngine.core.game.Game;
+import nebulous.loreEngine.core.game.MouseInteactionEvent;
+import nebulous.loreEngine.core.game.Scene;
+import nebulous.loreEngine.core.game.Sprite;
+import nebulous.loreEngine.core.game.StaticBackground;
+import nebulous.loreEngine.core.game.StaticForeground;
+import nebulous.loreEngine.core.game.UIButton;
+import nebulous.loreEngine.core.game.UIElement;
+import nebulous.loreEngine.core.game.UILayer;
+import nebulous.loreEngine.core.graphics.Texture;
+import nebulous.loreEngine.core.utils.Input;
 
 public class TestScene extends Scene {
 
