@@ -6,11 +6,17 @@ metadata/
 .metadata/
 recommenders/
 .recomenders/
+settings/
+.settings/
 *.project
+*.classpath
 
 # Gradle
 gradle/
+.gradle/
 build/
+gradlew.bat
+gradlew
 
 # Log file
 *.log
