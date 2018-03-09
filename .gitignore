@@ -1,11 +1,12 @@
 # Compiled class file
 *.class
+bin/
 
 # Eclipse
 metadata/
 .metadata/
 recommenders/
-.recomenders/
+.recommenders/
 settings/
 .settings/
 *.project
