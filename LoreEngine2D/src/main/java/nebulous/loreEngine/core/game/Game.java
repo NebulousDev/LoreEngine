@@ -206,9 +206,19 @@ public abstract class Game {
 		return activeScene;
 	}
 	
-	public int getActiveFPS()
+	public int getFramerate()
 	{
 		return activeFPS;
+	}
+	
+	public void setTickrate(int rate)
+	{
+		maxTPS = rate;
+	}
+	
+	public int getTickrate()
+	{
+		return maxTPS;
 	}
 
 }

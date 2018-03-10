@@ -45,6 +45,5 @@ dependencies {
 	compile "org.lwjgl:lwjgl-openal:$lwjglVersion:$lwjglNatives"
 	compile "org.lwjgl:lwjgl-opengl:$lwjglVersion:$lwjglNatives"
 	compile "org.lwjgl:lwjgl-stb:$lwjglVersion:$lwjglNatives"
-	compile "org.joml:joml:${jomlVersion}"
 	compile 'com.github.NebulousDev:LoreMathLib:1.0.2b'
 }

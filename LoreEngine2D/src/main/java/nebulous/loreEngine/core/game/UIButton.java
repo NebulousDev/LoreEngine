@@ -7,72 +7,81 @@ import nebulous.loreEngine.core.graphics.Texture;
 import nebulous.loreEngine.core.utils.Input;
 
 public class UIButton extends UIElement {
+	
+	protected Texture 				texture;
+	protected MouseInteactionEvent 	event;
+	protected boolean				mouseOver;
 
-	private Texture					texture;
-	private MouseInteactionEvent 	event;
-	private boolean 				mouseOver;
-	
-	int mx;
-	int my;
-	int mwidth;
-	int mheight;
-	
-	public UIButton(Texture texture, float x, float y, float width, float height, MouseInteactionEvent interaction) {
-		super(x, y, width, height);
-		event = interaction;
+	public UIButton(Texture texture, int offX, int offY, int width, int height, Anchor anchor, MouseInteactionEvent interaction) {
+		super(new Vector2f(offX, offY), new Vector2f(width, height), anchor);
 		this.texture = texture;
+		this.event = interaction;
 	}
 	
-	Vector2f mousePos = null;
+	@Override
+	public void create(Game game, Scene scene)
+	{
+		scene.getUIRenderList().add(this);
+	}
 	
 	@Override
-	public void update(Game game, Scene scene, double delta) {
-		super.update(game, scene, delta);
+	public void destroy(Game game, Scene scene)
+	{
 		
-		mousePos = Input.getMousePosition();
+	}
+	
+	@Override
+	public void update(Game game, Scene scene, double delta)
+	{
+		Vector2f mouse = Input.getMousePosition();
+		Vector2f pos = calcOffsets(toScreenPos(anchor.ndc, game.getWindow().getSize()), offset, size, anchor);
 		
-		mx = 		(int) (position.x * game.getWindow().getWidth());
-		my = 		(int) (position.y * game.getWindow().getHeight());
-		mwidth = 	(int) (width * game.getWindow().getWidth());
-		mheight = 	(int) (height * game.getWindow().getHeight());
-		
-		//System.out.println("\n" + mx);
-		//System.out.println(my);
-		//System.out.println(mwidth);
-		//System.out.println(mheight);
-		
-		if(mousePos.x >= mx && mousePos.x <= mx + mwidth && 
-				mousePos.y >= my && mousePos.y <= my + mheight)
+		if
+		(
+			mouse.x >= pos.x && 
+			mouse.x <= pos.x + size.x && 
+			mouse.y >= (game.getWindow().getHeight() - pos.y - size.y) && 
+			mouse.y <= (game.getWindow().getHeight() - pos.y))
 		{
 			if(!mouseOver)
 			{
-				event.interact(mousePos, MouseInteraction.MOUSE_ENTER);
+				event.interact(mouse, MouseInteraction.MOUSE_ENTER);
 				mouseOver = true;
 			}
 			
 			if(Input.isMouseButtonClicked(Input.MOUSE_BUTTON_1))
 			{
-				event.interact(mousePos, MouseInteraction.MOUSE_LEFT_CLICK);
+				event.interact(mouse, MouseInteraction.MOUSE_LEFT_CLICK);
 			}
 			
 			if(Input.isMouseButtonClicked(Input.MOUSE_BUTTON_2))
 			{
-				event.interact(mousePos, MouseInteraction.MOUSE_RIGHT_CLICK);
+				event.interact(mouse, MouseInteraction.MOUSE_RIGHT_CLICK);
 			}
 			
-			event.interact(mousePos, MouseInteraction.MOUSE_HOVER);
+			event.interact(mouse, MouseInteraction.MOUSE_HOVER);
 		}
 		else
 		{
 			if(mouseOver)
 			{
-				event.interact(mousePos, MouseInteraction.MOUSE_EXIT);
+				event.interact(mouse, MouseInteraction.MOUSE_EXIT);
 				mouseOver = false;
 			}
 		}
 		
 	}
-	
+
+	@Override
+	public void draw(Game game, Graphics gfx)
+	{
+		Vector2f pos = calcOffsets(toScreenPos(anchor.ndc, game.getWindow().getSize()), offset, size, anchor);
+		gfx.drawTexturedQuadUI(game.getWindow(), (int)pos.x, (int)pos.y, (int)size.x, (int)size.y, DEFAULT_UI_SHADER, texture);
+	}
+
+	@Override
+	public void tick(Game game, Scene scene, int tick, int tock) { }
+
 	@Override
 	public void onCreate(Game game, Scene scene) { }
 
@@ -84,10 +93,5 @@ public class UIButton extends UIElement {
 
 	@Override
 	public void onUpdate(Game game, Scene scene, double delta) { }
-
-	@Override
-	public void draw(Game game, Graphics gfx) {
-		gfx.drawTexturedQuadUI(game.getWindow(), mx, game.getWindow().getHeight() - my - mheight, mwidth, mheight, DEFAULT_UI_SHADER, texture);
-	}
 
 }

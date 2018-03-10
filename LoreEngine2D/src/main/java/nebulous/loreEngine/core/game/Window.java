@@ -1,5 +1,6 @@
 package nebulous.loreEngine.core.game;
 
+import lore.math.Vector2f;
 import nebulous.loreEngine.core.graphics.Graphics;
 import nebulous.loreEngine.core.utils.Log;
 import nebulous.loreEngine.core.utils.Log.LogLevel;
@@ -240,6 +241,11 @@ public class Window {
 
 	public DisplayMode getDisplayMode() {
 		return displayMode;
+	}
+	
+	public Vector2f getSize()
+	{
+		return new Vector2f(width, height);
 	}
 	
 }
