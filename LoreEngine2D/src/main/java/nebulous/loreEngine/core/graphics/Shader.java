@@ -8,6 +8,7 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL32;
 import org.lwjgl.system.MemoryUtil;
 
 import lore.math.Matrix4f;
@@ -24,8 +25,14 @@ public class Shader {
 	
 	private int		vertID;
 	private int		fragID;
+	private int		geomID;
 	
-	private Shader() {}
+	private Shader()
+	{
+		vertID = -1;
+		fragID = -1;
+		geomID = -1;
+	}
 	
 	public static String readFile(String path) throws IOException 
 	{
@@ -43,8 +50,14 @@ public class Shader {
 	
 	public static Shader create(String name, String vertex, String fragment)
 	{
+		return create(name, vertex, fragment, null);
+	}
+	
+	public static Shader create(String name, String vertex, String fragment, String geometry)
+	{
 		String vertString = "";
 		String fragmentString = "";
+		String geometryString = "";
 		
 		boolean success = true;
 		
@@ -62,12 +75,24 @@ public class Shader {
 			success = false;
 		} 
 		
+		if(geometry != null)
+		{
+			try {
+				geometryString = readFile("/" + geometry);
+			} catch (IOException e) {
+				Log.println(LogLevel.ERROR, "Unable to locate shader file : " + geometry);
+				success = false;
+			} 
+		}
+		
 		Shader shader = new Shader();
 		shader.programID = GL20.glCreateProgram();
 		
 		shader.vertID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
 		shader.fragID = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
-			
+		
+		if(geometry != null) shader.geomID = GL20.glCreateShader(GL32.GL_GEOMETRY_SHADER);
+		
 		GL20.glShaderSource(shader.vertID, vertString);
 		GL20.glAttachShader(shader.programID, shader.vertID);
 		GL20.glCompileShader(shader.vertID);
@@ -88,6 +113,20 @@ public class Shader {
 			Log.println(LogLevel.ERROR, "Error Compiling Fragment Shader : " + name + ":" + fragment + "\n" + message);
 			GL20.glDeleteShader(shader.fragID);
 			success = false;
+		}
+		
+		if(shader.geomID != -1)
+		{
+			GL20.glShaderSource(shader.geomID, geometryString);
+			GL20.glAttachShader(shader.programID, shader.geomID);
+			GL20.glCompileShader(shader.geomID);
+			if(GL20.glGetShaderi(shader.geomID, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE)
+			{
+				String message = GL20.glGetShaderInfoLog(shader.geomID);
+				Log.println(LogLevel.ERROR, "Error Compiling Geometry Shader : " + name + ":" + geometry + "\n" + message);
+				GL20.glDeleteShader(shader.geomID);
+				success = false;
+			}
 		}
 		
 		GL20.glLinkProgram(shader.programID);

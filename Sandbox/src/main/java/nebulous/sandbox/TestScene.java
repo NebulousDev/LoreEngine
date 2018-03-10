@@ -19,8 +19,9 @@ public class TestScene extends Scene {
 	public static final Texture BLUE 		= Texture.create("textures/default.png");
 	public static final Texture ORANGE 		= Texture.create("textures/default2.png");
 	public static final Texture VIGNETTE 	= Texture.create("textures/vignette.png");
+	public static final Texture ANIM 		= Texture.create("textures/default_animated.png");
 	
-	public Sprite  player 		= new Player();
+	public Sprite  player 		= new Player(ANIM, 32);
 	public UILayer background 	= new StaticBackground(ORANGE);
 	public UILayer foreground 	= new StaticForeground(VIGNETTE);
 	
@@ -98,7 +99,6 @@ public class TestScene extends Scene {
 		
 		add(testLeft);
 		add(testRight);
-		player.move(0.5f, 0.5f);
 		getCamera().zoom(-5.0f);
 	}
 

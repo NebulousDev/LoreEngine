@@ -7,10 +7,12 @@ import nebulous.loreEngine.core.graphics.Texture;
 public abstract class Sprite extends Entity2D {
 
 	public static final Shader DEFAULT_SPRITE_SHADER 
-		= Shader.create("default_sprite_shader", "shaders/vs_default.glsl", "shaders/fs_default.glsl");
+		= Shader.create("default_sprite_shader", 
+				"shaders/vs_default.glsl", 
+				"shaders/fs_default.glsl");
 	
-	private Texture texture;
-	private Shader	shader;
+	protected Texture texture;
+	protected Shader	shader;
 	
 	public abstract void onCreate(Game game, Scene scene);
 	public abstract void onDestroy(Game game, Scene scene);

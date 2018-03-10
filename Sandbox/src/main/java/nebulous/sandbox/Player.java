@@ -1,14 +1,15 @@
 package nebulous.sandbox;
 
+import nebulous.loreEngine.core.game.AnimatedSprite;
 import nebulous.loreEngine.core.game.Game;
 import nebulous.loreEngine.core.game.Scene;
-import nebulous.loreEngine.core.game.Sprite;
+import nebulous.loreEngine.core.graphics.Texture;
 
-public class Player extends Sprite {
+public class Player extends AnimatedSprite {
 	
-	public Player()
+	public Player(Texture texture, int offset)
 	{
-		
+		super(texture, offset);
 	}
 
 	@Override

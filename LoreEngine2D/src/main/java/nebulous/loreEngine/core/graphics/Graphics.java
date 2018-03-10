@@ -342,6 +342,23 @@ public class Graphics {
 		shader.unbind();
 	}
 	
+	public void drawTexturedPointQuadPerspective(Window window, Camera camera, Matrix4f transform, Shader shader, Texture texture)
+	{
+		shader.bind();
+		GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
+		Primatives.POINT_QUAD.bindBuffers();
+		shader.setUniform("view", camera.getView());
+		shader.setUniform("perspective", camera.getPerspective(window));
+		shader.setUniform("model", transform);
+		texture.bind(0);
+		GL11.glDrawElements(GL11.GL_POINTS, Primatives.POINT_QUAD.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
+		int err = GL11.glGetError();
+		if(err != 0) System.out.println("GL Error : " + err);
+		texture.unbind();
+		Primatives.POINT_QUAD.unbindBuffers();
+		shader.unbind();
+	}
+	
 	public void drawTexturedQuadUI(Window window, Matrix4f transform, Shader shader, Texture texture)
 	{
 		shader.bind();
