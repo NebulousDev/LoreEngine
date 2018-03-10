@@ -24,7 +24,7 @@ public class Player extends AnimatedSprite {
 
 	@Override
 	public void onTick(Game game, Scene scene, int tick, int tock) {
-		
+		if(tick == tock) nextFrame();
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public abstract class AnimatedSprite extends Sprite {
 	{
 		super(texture, shader);
 		this.offset = offset;
-		this.frame = 0;
+		this.frame = 1;
 		this.maxFrames = texture.getWidth() / offset;
 	}
 	
@@ -36,12 +36,26 @@ public abstract class AnimatedSprite extends Sprite {
 	
 	public void nextFrame()
 	{
-		this.frame++;
+		if(frame == maxFrames) 
+		{
+			frame = 1;
+		}
+		else
+		{
+			this.frame++;
+		}
 	}
 	
 	public void lastFrame()
 	{
-		this.frame--;
+		if(frame == 1) 
+		{
+			frame = maxFrames;
+		}
+		else
+		{
+			this.frame--;
+		}
 	}
 	
 	public abstract void onCreate(Game game, Scene scene);
@@ -62,9 +76,8 @@ public abstract class AnimatedSprite extends Sprite {
 	@Override
 	public void draw(Game game, Graphics gfx) {
 		shader.bind();
-		shader.setUniform("offset", offset);
-		shader.setUniform("frame", frame);
-		shader.setUniform("maxFrames", maxFrames);
+		shader.setUniform("frame", (float)frame - 1);
+		shader.setUniform("maxFrames", (float)maxFrames);
 		gfx.drawTexturedPointQuadPerspective(game.getWindow(), game.getActiveScene().getCamera(), getTransform(), shader, texture);
 	}
 }
