@@ -33,6 +33,8 @@ public abstract class Game {
 	protected double		activeMS;
 	protected int			maxTPS = 20;
 	
+	private boolean			drawBoundingBox;
+	
 	public Game(Window window)
 	{
 		this.state 		= State.STOPPED;
@@ -219,6 +221,16 @@ public abstract class Game {
 	public int getTickrate()
 	{
 		return maxTPS;
+	}
+	
+	public void enableDrawBoundingBoxes(boolean draw)
+	{
+		this.drawBoundingBox = draw;
+	}
+	
+	public boolean drawBoundingBoxesEnabled()
+	{
+		return drawBoundingBox;
 	}
 
 }

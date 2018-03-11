@@ -30,6 +30,7 @@ public class TestScene extends Scene {
 	
 	@Override
 	public void onLoad(Game game) {
+		game.enableDrawBoundingBoxes(true);
 		//setForeground(foreground);
 		setBackground(background);
 		add(player);

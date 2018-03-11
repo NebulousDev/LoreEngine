@@ -13,6 +13,7 @@ import org.lwjgl.system.MemoryUtil;
 
 import lore.math.Matrix4f;
 import lore.math.Vector3f;
+import lore.math.Vector4f;
 import nebulous.loreEngine.core.utils.Log;
 import nebulous.loreEngine.core.utils.Log.LogLevel;
 
@@ -177,6 +178,11 @@ public class Shader {
 	public void setUniform(String uniform, Vector3f value)
 	{
 		GL20.glUniform3f(GL20.glGetUniformLocation(programID, uniform), value.x, value.y, value.z);
+	}
+	
+	public void setUniform(String uniform, Vector4f value)
+	{
+		GL20.glUniform4f(GL20.glGetUniformLocation(programID, uniform), value.x, value.y, value.z, value.w);
 	}
 
 	public void setUniform(String uniform, Matrix4f value)

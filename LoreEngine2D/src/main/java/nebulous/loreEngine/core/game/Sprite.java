@@ -11,7 +11,7 @@ public abstract class Sprite extends Entity2D {
 				"shaders/vs_default.glsl", 
 				"shaders/fs_default.glsl");
 	
-	protected Texture texture;
+	protected Texture 	texture;
 	protected Shader	shader;
 	
 	public abstract void onCreate(Game game, Scene scene);
@@ -49,6 +49,8 @@ public abstract class Sprite extends Entity2D {
 	public void draw(Game game, Graphics gfx) 
 	{
 		gfx.drawTexturedQuadPerspective(game.getWindow(), game.getActiveScene().getCamera(), getTransform(), shader, texture);
+		if(game.drawBoundingBoxesEnabled()) 
+			collider.draw(game, gfx);
 	}
 
 }

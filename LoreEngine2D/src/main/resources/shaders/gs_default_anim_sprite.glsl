@@ -24,15 +24,15 @@ void main()
 	gTexCoord = vec2(end, 0);
 	EmitVertex();
 	
-	gl_Position = perspective * view * model * (vPosition[0] + vec4(-2, 2, 0, 1));
+	gl_Position = perspective * view * model * (vPosition[0] + vec4(0, 2, 0, 1));
 	gTexCoord = vec2(start, 0);
 	EmitVertex();
 	
-	gl_Position = perspective * view * model * (vPosition[0] + vec4(2, -2, 0, 1));
+	gl_Position = perspective * view * model * (vPosition[0] + vec4(2, 0, 0, 1));
 	gTexCoord = vec2(end, 1);
 	EmitVertex();
 	
-	gl_Position = perspective * view * model * (vPosition[0] + vec4(-2, -2, 0, 1));
+	gl_Position = perspective * view * model * (vPosition[0] + vec4(0, 0, 0, 1));
 	gTexCoord = vec2(start, 1);
 	EmitVertex();
 	

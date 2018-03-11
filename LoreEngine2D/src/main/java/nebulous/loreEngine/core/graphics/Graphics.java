@@ -11,11 +11,16 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
 import lore.math.Matrix4f;
+import lore.math.Vector3f;
+import lore.math.Vector4f;
 import nebulous.loreEngine.core.game.Window;
 import nebulous.loreEngine.core.utils.Log;
 import nebulous.loreEngine.core.utils.Log.LogLevel;
 
 public class Graphics {
+	
+	public static final Matrix4f PERSPECTIVE_OFFSET 
+		= Matrix4f.Translation(new Vector3f(-0.5f, -0.5f, 0));
 	
 	public enum DrawMode
 	{
@@ -334,7 +339,7 @@ public class Graphics {
 		Primatives.QUAD.bindBuffers();
 		shader.setUniform("view", camera.getView());
 		shader.setUniform("perspective", camera.getPerspective(window));
-		shader.setUniform("model", transform);
+		shader.setUniform("model", transform.mul(PERSPECTIVE_OFFSET));
 		texture.bind(0);
 		GL11.glDrawElements(GL11.GL_TRIANGLE_STRIP, Primatives.QUAD.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
 		texture.unbind();
@@ -349,11 +354,9 @@ public class Graphics {
 		Primatives.POINT_QUAD.bindBuffers();
 		shader.setUniform("view", camera.getView());
 		shader.setUniform("perspective", camera.getPerspective(window));
-		shader.setUniform("model", transform);
+		shader.setUniform("model", transform.mul(PERSPECTIVE_OFFSET));
 		texture.bind(0);
 		GL11.glDrawElements(GL11.GL_POINTS, Primatives.POINT_QUAD.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
-		int err = GL11.glGetError();
-		if(err != 0) System.out.println("GL Error : " + err);
 		texture.unbind();
 		Primatives.POINT_QUAD.unbindBuffers();
 		shader.unbind();
@@ -363,12 +366,12 @@ public class Graphics {
 	{
 		shader.bind();
 		GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
-		Primatives.QUAD.bindBuffers();
+		Primatives.QUAD_UI.bindBuffers();
 		shader.setUniform("model", transform);
 		texture.bind(0);
-		GL11.glDrawElements(GL11.GL_TRIANGLE_STRIP, Primatives.QUAD.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
+		GL11.glDrawElements(GL11.GL_TRIANGLE_STRIP, Primatives.QUAD_UI.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
 		texture.unbind();
-		Primatives.QUAD.unbindBuffers();
+		Primatives.QUAD_UI.unbindBuffers();
 		shader.unbind();
 	}
 	
@@ -376,13 +379,33 @@ public class Graphics {
 	{
 		shader.bind();
 		GL11.glViewport(x, y, width, height);
-		Primatives.QUAD.bindBuffers();
+		Primatives.QUAD_UI.bindBuffers();
 		shader.setUniform("model", Matrix4f.Identity());
 		texture.bind(0);
-		GL11.glDrawElements(GL11.GL_TRIANGLE_STRIP, Primatives.QUAD.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
+		GL11.glDrawElements(GL11.GL_TRIANGLE_STRIP, Primatives.QUAD_UI.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
 		texture.unbind();
-		Primatives.QUAD.unbindBuffers();
+		Primatives.QUAD_UI.unbindBuffers();
 		shader.unbind();
+	}
+	
+	public void drawLinePerspective(Window window, Camera camera, Matrix4f transform, float x1, float y1, float x2, float y2, Shader shader, Vector4f color)
+	{
+		shader.bind();
+		GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
+		Primatives.POINT.bindBuffers();
+		GL11.glLineWidth(2f);
+		shader.setUniform("view", camera.getView());
+		shader.setUniform("perspective", camera.getPerspective(window));
+		shader.setUniform("model", transform);
+		shader.setUniform("startX", x1 - 0.5f);
+		shader.setUniform("startY", y1 - 0.5f);
+		shader.setUniform("endX", x2 - 0.5f);
+		shader.setUniform("endY", y2 - 0.5f);
+		shader.setUniform("color", color);
+		GL11.glDrawElements(GL11.GL_POINTS, Primatives.LINE.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
+		//GL11.glDrawArrays(GL11.GL_LINES, 0, 1);
+		Primatives.POINT.unbindBuffers();
+        shader.unbind();
 	}
 	
 	public boolean isInitialized()
