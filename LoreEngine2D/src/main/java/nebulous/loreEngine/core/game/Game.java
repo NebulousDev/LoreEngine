@@ -53,6 +53,7 @@ public abstract class Game {
 		graphics.initialize();
 		Input.init(window);
 		window.show();
+		window.center();
 		
 		registerTexture("default", Texture.DEFAULT1);
 		registerTexture("default2", Texture.DEFAULT2);
