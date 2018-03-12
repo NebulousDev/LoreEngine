@@ -4,7 +4,7 @@ import nebulous.loreEngine.core.graphics.Graphics;
 import nebulous.loreEngine.core.graphics.Shader;
 import nebulous.loreEngine.core.graphics.Texture;
 
-public abstract class Sprite extends Entity2D {
+public abstract class Sprite extends Entity {
 
 	public static final Shader DEFAULT_SPRITE_SHADER 
 		= Shader.create("default_sprite_shader", 
@@ -50,7 +50,7 @@ public abstract class Sprite extends Entity2D {
 	{
 		gfx.drawTexturedQuadPerspective(game.getWindow(), game.getActiveScene().getCamera(), getTransform(), shader, texture);
 		if(game.drawBoundingBoxesEnabled()) 
-			collider.draw(game, gfx);
+			box.draw(game, gfx);
 	}
 
 }

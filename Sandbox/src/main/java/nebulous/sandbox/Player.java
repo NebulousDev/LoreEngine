@@ -1,7 +1,7 @@
 package nebulous.sandbox;
 
 import nebulous.loreEngine.core.game.AnimatedSprite;
-import nebulous.loreEngine.core.game.Entity2D;
+import nebulous.loreEngine.core.game.Entity;
 import nebulous.loreEngine.core.game.Game;
 import nebulous.loreEngine.core.game.Scene;
 import nebulous.loreEngine.core.graphics.Texture;
@@ -34,7 +34,7 @@ public class Player extends AnimatedSprite {
 	}
 
 	@Override
-	public void onCollide(Game game, Scene scene, Entity2D entity) {
+	public void onCollide(Game game, Scene scene, Entity entity) {
 		
 	}
 

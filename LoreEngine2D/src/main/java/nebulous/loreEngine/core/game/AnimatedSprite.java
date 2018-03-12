@@ -80,6 +80,6 @@ public abstract class AnimatedSprite extends Sprite {
 		shader.setUniform("maxFrames", (float)maxFrames);
 		gfx.drawTexturedPointQuadPerspective(game.getWindow(), game.getActiveScene().getCamera(), getTransform(), shader, texture);
 		if(game.drawBoundingBoxesEnabled())
-			collider.draw(game, gfx);
+			box.draw(game, gfx);
 	}
 }

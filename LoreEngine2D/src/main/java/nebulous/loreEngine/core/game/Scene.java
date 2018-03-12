@@ -7,7 +7,7 @@ import nebulous.loreEngine.core.graphics.Graphics;
 
 public abstract class Scene {
 
-	private ArrayList<Entity2D> entityList;
+	private ArrayList<Entity> entityList;
 	private ArrayList<UIElement> uiList;
 	
 	private UILayer background;
@@ -22,7 +22,7 @@ public abstract class Scene {
 	
 	public Scene()
 	{
-		entityList 			= new ArrayList<Entity2D>();	
+		entityList 			= new ArrayList<Entity>();	
 		uiList				= new ArrayList<UIElement>();
 		entityRenderList 	= new RenderList();
 		uiRenderList 		= new RenderList();
@@ -35,7 +35,7 @@ public abstract class Scene {
 	{
 		onLoad(game);
 		
-		for(Entity2D e : entityList)
+		for(Entity e : entityList)
 		{
 			e.create(game, this);
 		}
@@ -52,7 +52,7 @@ public abstract class Scene {
 	{
 		onUnload(game);
 		
-		for(Entity2D e : entityList)
+		for(Entity e : entityList)
 		{
 			e.destroy(game, this);
 		}
@@ -73,7 +73,7 @@ public abstract class Scene {
 	void tick(Game game, int tick, int tock)
 	{
 		onTick(game, tick, tock);
-		for(Entity2D e : entityList)
+		for(Entity e : entityList)
 		{
 			e.tick(game, this, tick, tock);
 		}
@@ -83,7 +83,7 @@ public abstract class Scene {
 	{
 		onUpdate(game, delta);
 		
-		for(Entity2D e : entityList)
+		for(Entity e : entityList)
 		{
 			e.update(game, this, delta);
 		}
@@ -104,7 +104,7 @@ public abstract class Scene {
 		this.foreground = foreground;
 	}
 	
-	public void add(Entity2D entity)
+	public void add(Entity entity)
 	{
 		if(loaded)
 		{
@@ -118,7 +118,7 @@ public abstract class Scene {
 		
 	}
 	
-	public void remove(Entity2D entity)
+	public void remove(Entity entity)
 	{
 		if(loaded)
 		{
@@ -170,7 +170,7 @@ public abstract class Scene {
 	public abstract void onTick(Game game, int tick, int tock);
 	public abstract void onUpdate(Game game, double delta);
 
-	public ArrayList<Entity2D> getEntityList() {
+	public ArrayList<Entity> getEntityList() {
 		return entityList;
 	}
 
