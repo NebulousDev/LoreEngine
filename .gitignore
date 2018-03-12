@@ -13,11 +13,11 @@ settings/
 *.classpath
 
 # Gradle
-gradle/
-.gradle/
+#gradle/
+#.gradle/
 build/
-gradlew.bat
-gradlew
+#gradlew.bat
+#gradlew
 
 # Log file
 *.log
