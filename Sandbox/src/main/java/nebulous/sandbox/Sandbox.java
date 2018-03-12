@@ -27,7 +27,7 @@ public class Sandbox extends Game {
 		final Texture ANIM 		= Texture.create("textures/default_animated.png");
 		
 		registerTexture("blue", BLUE);
-		registerTexture("oragne", ORANGE);
+		registerTexture("orange", ORANGE);
 		registerTexture("anim", ANIM);
 		registerScene("testScene", testScene);
 	}

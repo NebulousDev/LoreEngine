@@ -53,6 +53,7 @@ public class AABBCollisionBox implements IRenderable {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	public void resolve(AABBCollisionBox other)
 	{
 		Vector2f center = new Vector2f(0);

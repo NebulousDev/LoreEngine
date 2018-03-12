@@ -11,7 +11,6 @@ import nebulous.loreEngine.core.game.UIButton;
 import nebulous.loreEngine.core.game.UIElement;
 import nebulous.loreEngine.core.game.UIElement.Anchor;
 import nebulous.loreEngine.core.game.UILayer;
-import nebulous.loreEngine.core.graphics.Texture;
 import nebulous.loreEngine.core.utils.Input;
 
 public class TestScene extends Scene {
@@ -27,15 +26,17 @@ public class TestScene extends Scene {
 	@Override
 	public void onLoad(Game game) {
 		game.enableDrawBoundingBoxes(true);
-		//setForeground(foreground);
-		//setBackground(background);
-		add(block);
-		add(player);
 		
 		block 		= new Block();
-		player 		= new Player(game.getTexture("blue"), 32);
+		player 		= new Player(game.getTexture("anim"), 32);
 		background 	= new StaticBackground(game.getTexture("orange"));
 		foreground 	= new StaticForeground(game.getTexture("orange"));
+		
+		//setForeground(foreground);
+		setBackground(background);
+
+		add(block);
+		add(player);
 		
 		block.setPos(3, 3);
 		

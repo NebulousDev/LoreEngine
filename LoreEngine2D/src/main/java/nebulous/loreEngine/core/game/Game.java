@@ -44,6 +44,7 @@ public abstract class Game {
 		this.graphics 	= new Graphics().initialize();
 		this.window 	= window.create(this);
 		this.sceneMap	= new HashMap<String, Scene>();
+		this.textureMap = new HashMap<String, Texture>();
 	}
 	
 	public void preInit()
@@ -178,7 +179,16 @@ public abstract class Game {
 	
 	public Texture getTexture(String tag)
 	{
-		return textureMap.get(tag);
+		if(textureMap.containsKey(tag))
+		{
+			return textureMap.get(tag);
+		}
+		else
+		{
+			Log.println(LogLevel.ERROR, "Unable to find texture '" + tag + "'. Check spelling " + 
+					"or make sure you the texture has been properly registered.");
+			return Texture.DEFAULT1;
+		}
 	}
 	
 	public void loadScene(String tag)
