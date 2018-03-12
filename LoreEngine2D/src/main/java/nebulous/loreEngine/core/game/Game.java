@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import nebulous.loreEngine.core.LoreEngineInfo;
 import nebulous.loreEngine.core.graphics.Graphics;
+import nebulous.loreEngine.core.graphics.Texture;
 import nebulous.loreEngine.core.utils.Input;
 import nebulous.loreEngine.core.utils.Log;
 import nebulous.loreEngine.core.utils.Log.LogLevel;
@@ -29,6 +30,8 @@ public abstract class Game {
 	protected HashMap<String, Scene> 	sceneMap;
 	protected Scene						activeScene;
 	
+	protected HashMap<String, Texture> 	textureMap;
+	
 	protected int			activeFPS;
 	protected double		activeMS;
 	protected int			maxTPS = 20;
@@ -49,6 +52,9 @@ public abstract class Game {
 		graphics.initialize();
 		Input.init(window);
 		window.show();
+		
+		registerTexture("default", Texture.DEFAULT1);
+		registerTexture("default2", Texture.DEFAULT2);
 	}
 	
 	public void start()
@@ -163,6 +169,16 @@ public abstract class Game {
 	public void registerScene(String tag, Scene scene)
 	{
 		sceneMap.put(tag, scene);
+	}
+	
+	public void registerTexture(String tag, Texture texture)
+	{
+		textureMap.put(tag, texture);
+	}
+	
+	public Texture getTexture(String tag)
+	{
+		return textureMap.get(tag);
 	}
 	
 	public void loadScene(String tag)

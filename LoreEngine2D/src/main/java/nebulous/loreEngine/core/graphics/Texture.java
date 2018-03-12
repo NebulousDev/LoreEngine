@@ -14,7 +14,8 @@ import nebulous.loreEngine.core.utils.Log.LogLevel;
 
 public class Texture {
 	
-	public static Texture DEFAULT = Texture.create("textures/default.png");
+	public static Texture DEFAULT1 = Texture.create("textures/default.png");
+	public static Texture DEFAULT2 = Texture.create("textures/default2.png");
 	
 	public enum TextureFilter
 	{
@@ -104,7 +105,7 @@ public class Texture {
 			image = ImageIO.read(Texture.class.getResource("/" + path));
 		} catch(Exception e){
 			Log.println(LogLevel.ERROR, "Failed to locate texture " + path + "! Using DEFAULT texture...");
-        	return Texture.DEFAULT;
+        	return Texture.DEFAULT1;
 		}
 
 		texture.width = image.getWidth();

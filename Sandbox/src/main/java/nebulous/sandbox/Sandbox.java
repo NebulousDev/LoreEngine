@@ -1,10 +1,14 @@
 package nebulous.sandbox;
 
 import nebulous.loreEngine.core.game.Game;
+import nebulous.loreEngine.core.game.Scene;
 import nebulous.loreEngine.core.game.Window;
+import nebulous.loreEngine.core.graphics.Texture;
 
 public class Sandbox extends Game {
 
+	public Scene testScene = new TestScene();
+	
 	public Sandbox(Window window) {
 		super(window);
 	}
@@ -18,11 +22,19 @@ public class Sandbox extends Game {
 	public void onInit() {
 		window.center();
 		
+		final Texture BLUE 		= Texture.create("textures/default.png");
+		final Texture ORANGE 	= Texture.create("textures/default2.png");
+		final Texture ANIM 		= Texture.create("textures/default_animated.png");
+		
+		registerTexture("blue", BLUE);
+		registerTexture("oragne", ORANGE);
+		registerTexture("anim", ANIM);
+		registerScene("testScene", testScene);
 	}
 
 	@Override
 	public void onStart() {
-		loadScene(new TestScene());
+		loadScene("testScene");
 	}
 
 	@Override

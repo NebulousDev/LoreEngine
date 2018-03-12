@@ -32,7 +32,7 @@ public abstract class Sprite extends Entity {
 
 	public Sprite()
 	{
-		this(Texture.DEFAULT);
+		this(Texture.DEFAULT1);
 	}
 	
 	public Texture getTexture() 

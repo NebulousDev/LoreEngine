@@ -15,16 +15,11 @@ import nebulous.loreEngine.core.graphics.Texture;
 import nebulous.loreEngine.core.utils.Input;
 
 public class TestScene extends Scene {
-
-	public static final Texture BLUE 		= Texture.create("textures/default.png");
-	public static final Texture ORANGE 		= Texture.create("textures/default2.png");
-	public static final Texture VIGNETTE 	= Texture.create("textures/vignette.png");
-	public static final Texture ANIM 		= Texture.create("textures/default_animated.png");
 	
-	public Sprite  block 		= new Block();
-	public Sprite  player 		= new Player(ANIM, 32);
-	public UILayer background 	= new StaticBackground(ORANGE);
-	public UILayer foreground 	= new StaticForeground(VIGNETTE);
+	public Sprite  block;
+	public Sprite  player;
+	public UILayer background;
+	public UILayer foreground;
 	
 	public UIElement testLeft;
 	public UIElement testRight;
@@ -37,9 +32,14 @@ public class TestScene extends Scene {
 		add(block);
 		add(player);
 		
+		block 		= new Block();
+		player 		= new Player(game.getTexture("blue"), 32);
+		background 	= new StaticBackground(game.getTexture("orange"));
+		foreground 	= new StaticForeground(game.getTexture("orange"));
+		
 		block.setPos(3, 3);
 		
-		testLeft = new UIButton(BLUE, 0, 0, 100, 500, Anchor.LEFT, new MouseInteactionEvent() {
+		testLeft = new UIButton(game.getTexture("blue"), 0, 0, 100, 500, Anchor.LEFT, new MouseInteactionEvent() {
 			
 			@Override
 			public void interact(Vector2f pos, MouseInteraction interaction) {
@@ -70,7 +70,7 @@ public class TestScene extends Scene {
 			}
 
 		});
-		testRight = new UIButton(BLUE, 0, 0, 100, 100, Anchor.RIGHT, new MouseInteactionEvent() {
+		testRight = new UIButton(game.getTexture("blue"), 0, 0, 100, 100, Anchor.RIGHT, new MouseInteactionEvent() {
 			
 			@Override
 			public void interact(Vector2f pos, MouseInteraction interaction) {
