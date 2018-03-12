@@ -115,7 +115,7 @@ public abstract class Game {
 		{
 			graphics.clearBuffers();
 			Input.update();
-			graphics.pollEvents();
+			window.update(this);
 		
 			oldTime = newTime;
 			newTime = System.nanoTime();
@@ -148,7 +148,7 @@ public abstract class Game {
 			int err = GL11.glGetError();
 			if(err != 0) System.out.println("GL Error : " + err);
 			
-			graphics.swapBuffers(window);
+			window.render();
 			
 			msEnd = System.nanoTime();
 			

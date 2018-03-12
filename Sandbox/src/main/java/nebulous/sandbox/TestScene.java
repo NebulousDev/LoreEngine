@@ -21,6 +21,7 @@ public class TestScene extends Scene {
 	public static final Texture VIGNETTE 	= Texture.create("textures/vignette.png");
 	public static final Texture ANIM 		= Texture.create("textures/default_animated.png");
 	
+	public Sprite  block 		= new Block();
 	public Sprite  player 		= new Player(ANIM, 32);
 	public UILayer background 	= new StaticBackground(ORANGE);
 	public UILayer foreground 	= new StaticForeground(VIGNETTE);
@@ -32,8 +33,11 @@ public class TestScene extends Scene {
 	public void onLoad(Game game) {
 		game.enableDrawBoundingBoxes(true);
 		//setForeground(foreground);
-		setBackground(background);
+		//setBackground(background);
+		add(block);
 		add(player);
+		
+		block.setPos(3, 3);
 		
 		testLeft = new UIButton(BLUE, 0, 0, 100, 500, Anchor.LEFT, new MouseInteactionEvent() {
 			
@@ -98,14 +102,15 @@ public class TestScene extends Scene {
 
 		});
 		
-		add(testLeft);
-		add(testRight);
+		//add(testLeft);
+		//add(testRight);
 		getCamera().zoom(-5.0f);
 	}
 
 	@Override
 	public void onUnload(Game game) {
 		remove(player);
+		remove(block);
 	}
 
 	@Override
@@ -113,7 +118,7 @@ public class TestScene extends Scene {
 		game.getWindow().setTitle("Sandbox | FPS:" + game.getFramerate());
 	}
 	
-	float cameraSpeed = 10.0f;
+	float cameraSpeed = 5.0f;
 
 	@Override
 	public void onUpdate(Game game, double delta) {
@@ -122,46 +127,43 @@ public class TestScene extends Scene {
 		
 		if(Input.isKeyHeld(Input.KEY_W))
 		{
-			getCamera().move(0.0f, -speed);
+			player.move(0.0f, speed);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_S))
 		{
-			getCamera().move(0.0f, speed);
+			player.move(0.0f, -speed);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_A))
 		{
-			getCamera().move(speed, 0.0f);
+			player.move(-speed, 0.0f);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_D))
 		{
-			getCamera().move(-speed, 0.0f);
+			player.move(speed, 0.0f);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_UP))
 		{
 			getCamera().zoom(-0.001f);
-			//testUI.move(0.0f, speed / 10.0f);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_DOWN))
 		{
 			getCamera().zoom(0.001f);
-			//testUI.move(0.0f, -speed / 10.0f);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_LEFT))
 		{
-			//testUI.move(-speed / 10.0f, 0.0f);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_RIGHT))
 		{
-			//testUI.move(speed / 10.0f, 0.0f);
 		}
 		
+		getCamera().setPos(-player.getPosX(), -player.getPosY());
 	}
 
 }

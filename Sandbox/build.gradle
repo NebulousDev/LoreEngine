@@ -32,5 +32,5 @@ repositories {
 
 dependencies {
 	compile project(":LoreEngine2D");
-	compile 'com.github.NebulousDev:LoreMathLib:1.0.2b'
+	compile 'com.github.NebulousDev:LoreMathLib:1.1.0'
 }

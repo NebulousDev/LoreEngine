@@ -1,17 +1,11 @@
 package nebulous.sandbox;
 
-import nebulous.loreEngine.core.game.AnimatedSprite;
 import nebulous.loreEngine.core.game.Entity2D;
 import nebulous.loreEngine.core.game.Game;
 import nebulous.loreEngine.core.game.Scene;
-import nebulous.loreEngine.core.graphics.Texture;
+import nebulous.loreEngine.core.game.Sprite;
 
-public class Player extends AnimatedSprite {
-	
-	public Player(Texture texture, int offset)
-	{
-		super(texture, offset);
-	}
+public class Block extends Sprite {
 
 	@Override
 	public void onCreate(Game game, Scene scene) {
@@ -25,7 +19,7 @@ public class Player extends AnimatedSprite {
 
 	@Override
 	public void onTick(Game game, Scene scene, int tick, int tock) {
-		if(tick == tock) nextFrame();
+		
 	}
 
 	@Override

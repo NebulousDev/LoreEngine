@@ -32,14 +32,14 @@ public class Mesh {
 	public void bindBuffers()
 	{
 		vao.bind();
-		vbo.bind();
+		//vbo.bind();
 		ibo.bind();
 	}
 	
 	public void unbindBuffers()
 	{
 		ibo.unbind();
-		vbo.unbind();
+		//vbo.unbind();
 		vao.unbind();
 	}
 

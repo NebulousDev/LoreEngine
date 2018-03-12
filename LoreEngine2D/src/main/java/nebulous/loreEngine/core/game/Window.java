@@ -65,6 +65,18 @@ public class Window {
 		}
 	}
 	
+	public void render()
+	{
+		if(created)
+		{
+			graphics.swapBuffers(this);			
+		}
+		else
+		{
+			Log.println(LogLevel.ERROR, "Attempted to render window, but window was never created!");
+		}
+	}
+	
 	public Window resize(int width, int height)
 	{
 		if(created)
@@ -176,7 +188,8 @@ public class Window {
 		}
 	}
 
-	public String getTitle() {
+	public String getTitle()
+	{
 		return title;
 	}
 
@@ -197,27 +210,33 @@ public class Window {
 		return this;
 	}
 	
-	public int getWidth() {
+	public int getWidth()
+	{
 		return width;
 	}
 
-	public int getHeight() {
+	public int getHeight()
+	{
 		return height;
 	}
 	
-	public int getPosX() {
+	public int getPosX()
+	{
 		return posX;
 	}
 
-	public int getPosY() {
+	public int getPosY()
+	{
 		return posY;
 	}
 
-	public boolean isVSync() {
+	public boolean isVSync()
+	{
 		return vSync;
 	}
 
-	public Window setVSync(boolean vSync) {
+	public Window setVSync(boolean vSync)
+	{
 		
 		if(graphics.setVSync(vSync))
 		{
@@ -227,19 +246,23 @@ public class Window {
 		return this;
 	}
 	
-	public long getWindowID() {
+	public long getWindowID()
+	{
 		return windowID;
 	}
 
-	public boolean isCreated() {
+	public boolean isCreated()
+	{
 		return created;
 	}
 
-	public boolean isHidden() {
+	public boolean isHidden()
+	{
 		return hidden;
 	}
 
-	public DisplayMode getDisplayMode() {
+	public DisplayMode getDisplayMode()
+	{
 		return displayMode;
 	}
 	
