@@ -11,16 +11,12 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
 import lore.math.Matrix4f;
-import lore.math.Vector3f;
 import lore.math.Vector4f;
 import nebulous.loreEngine.core.game.Window;
 import nebulous.loreEngine.core.utils.Log;
 import nebulous.loreEngine.core.utils.Log.LogLevel;
 
 public class Graphics {
-	
-	public static final Matrix4f PERSPECTIVE_OFFSET 
-		= Matrix4f.Translation(new Vector3f(-0.5f, -0.5f, 0));
 	
 	public enum DrawMode
 	{
@@ -339,12 +335,15 @@ public class Graphics {
 		Primatives.QUAD.bindBuffers();
 		shader.setUniform("view", camera.getView());
 		shader.setUniform("perspective", camera.getPerspective(window));
-		shader.setUniform("model", transform.mul(PERSPECTIVE_OFFSET));
+		shader.setUniform("model", transform);
 		texture.bind(0);
 		GL11.glDrawElements(GL11.GL_TRIANGLE_STRIP, Primatives.QUAD.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
 		texture.unbind();
 		Primatives.QUAD.unbindBuffers();
 		shader.unbind();
+		
+		int err = GL11.glGetError();
+		if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured in 'drawTexturedQuadPerspective()': " + err);
 	}
 	
 	public void drawTexturedPointQuadPerspective(Window window, Camera camera, Matrix4f transform, Shader shader, Texture texture)
@@ -354,12 +353,15 @@ public class Graphics {
 		Primatives.POINT_QUAD.bindBuffers();
 		shader.setUniform("view", camera.getView());
 		shader.setUniform("perspective", camera.getPerspective(window));
-		shader.setUniform("model", transform.mul(PERSPECTIVE_OFFSET));
+		shader.setUniform("model", transform);
 		texture.bind(0);
 		GL11.glDrawElements(GL11.GL_POINTS, Primatives.POINT_QUAD.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
 		texture.unbind();
 		Primatives.POINT_QUAD.unbindBuffers();
 		shader.unbind();
+		
+		int err = GL11.glGetError();
+		if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured in 'drawTexturedPointQuadPerspective()': " + err);
 	}
 	
 	public void drawTexturedQuadUI(Window window, Matrix4f transform, Shader shader, Texture texture)
@@ -373,6 +375,9 @@ public class Graphics {
 		texture.unbind();
 		Primatives.QUAD_UI.unbindBuffers();
 		shader.unbind();
+		
+		int err = GL11.glGetError();
+		if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured in 'drawTexturedQuadUI()': " + err);
 	}
 	
 	public void drawTexturedQuadUI(Window window, int x, int y, int width, int height, Shader shader, Texture texture)
@@ -386,6 +391,9 @@ public class Graphics {
 		texture.unbind();
 		Primatives.QUAD_UI.unbindBuffers();
 		shader.unbind();
+		
+		int err = GL11.glGetError();
+		if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured in 'drawTexturedQuadUI()': " + err);
 	}
 	
 	public void drawLinePerspective(Window window, Camera camera, Matrix4f transform, float x1, float y1, float x2, float y2, Shader shader, Vector4f color)
@@ -406,6 +414,9 @@ public class Graphics {
 		//GL11.glDrawArrays(GL11.GL_LINES, 0, 1);
 		Primatives.POINT.unbindBuffers();
         shader.unbind();
+        
+        int err = GL11.glGetError();
+		if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured in 'drawLinePerspective()': " + err);
 	}
 	
 	public boolean isInitialized()

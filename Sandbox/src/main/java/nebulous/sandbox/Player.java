@@ -1,5 +1,6 @@
 package nebulous.sandbox;
 
+import lore.math.Vector2f;
 import nebulous.loreEngine.core.game.AnimatedSprite;
 import nebulous.loreEngine.core.game.Entity;
 import nebulous.loreEngine.core.game.Game;
@@ -34,8 +35,8 @@ public class Player extends AnimatedSprite {
 	}
 
 	@Override
-	public void onCollide(Game game, Scene scene, Entity entity) {
-		
+	public void onCollide(Game game, Scene scene, Entity entity, Vector2f distance) {
+		move(distance, 1.0f);
 	}
 
 }

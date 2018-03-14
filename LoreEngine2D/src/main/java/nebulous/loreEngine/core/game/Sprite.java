@@ -49,8 +49,7 @@ public abstract class Sprite extends Entity {
 	public void draw(Game game, Graphics gfx) 
 	{
 		gfx.drawTexturedQuadPerspective(game.getWindow(), game.getActiveScene().getCamera(), getTransform(), shader, texture);
-		if(game.drawBoundingBoxesEnabled()) 
-			box.draw(game, gfx);
+		drawBoundingBox(game, gfx);
 	}
 
 }

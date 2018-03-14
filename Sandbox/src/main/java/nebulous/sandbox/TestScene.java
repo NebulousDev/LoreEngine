@@ -38,7 +38,12 @@ public class TestScene extends Scene {
 		add(block);
 		add(player);
 		
-		block.setPos(3, 3);
+		block.setPos(3, 0);
+		block.setSize(2, 3);
+		block.enableDrawBounds();
+		
+		player.setSize(4, 1);
+		player.enableDrawBounds();
 		
 		testLeft = new UIButton(game.getTexture("blue"), 0, 0, 100, 500, Anchor.LEFT, new MouseInteactionEvent() {
 			
@@ -119,6 +124,11 @@ public class TestScene extends Scene {
 		game.getWindow().setTitle("Sandbox | FPS:" + game.getFramerate());
 	}
 	
+	final Vector2f UP 		= new Vector2f( 0,  1);
+	final Vector2f DOWN 	= new Vector2f( 0, -1);
+	final Vector2f LEFT 	= new Vector2f(-1,  0);
+	final Vector2f RIGHT 	= new Vector2f( 1,  0);
+	
 	float cameraSpeed = 5.0f;
 
 	@Override
@@ -128,22 +138,22 @@ public class TestScene extends Scene {
 		
 		if(Input.isKeyHeld(Input.KEY_W))
 		{
-			player.move(0.0f, speed);
+			player.move(UP, speed);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_S))
 		{
-			player.move(0.0f, -speed);
+			player.move(DOWN, speed);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_A))
 		{
-			player.move(-speed, 0.0f);
+			player.move(LEFT, speed);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_D))
 		{
-			player.move(speed, 0.0f);
+			player.move(RIGHT, speed);
 		}
 		
 		if(Input.isKeyHeld(Input.KEY_UP))

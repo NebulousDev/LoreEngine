@@ -153,14 +153,15 @@ public abstract class Game {
 			activeScene.render(this, graphics);
 			frames++;
 			
-			int err = GL11.glGetError();
-			if(err != 0) System.out.println("GL Error : " + err);
-			
 			window.render();
 			
 			msEnd = System.nanoTime();
 			
 			activeMS = msEnd - msStart;
+			
+			int err = GL11.glGetError();
+			if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured: " + err);
+			
 		}
 		
 		graphics.terminate();

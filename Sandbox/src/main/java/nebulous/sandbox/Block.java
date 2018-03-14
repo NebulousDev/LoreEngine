@@ -1,5 +1,6 @@
 package nebulous.sandbox;
 
+import lore.math.Vector2f;
 import nebulous.loreEngine.core.game.Entity;
 import nebulous.loreEngine.core.game.Game;
 import nebulous.loreEngine.core.game.Scene;
@@ -28,7 +29,7 @@ public class Block extends Sprite {
 	}
 
 	@Override
-	public void onCollide(Game game, Scene scene, Entity entity) {
+	public void onCollide(Game game, Scene scene, Entity entity, Vector2f distance) {
 		
 	}
 
