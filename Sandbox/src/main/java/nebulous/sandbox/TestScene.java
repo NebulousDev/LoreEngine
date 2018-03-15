@@ -16,6 +16,7 @@ import nebulous.loreEngine.core.utils.Input;
 public class TestScene extends Scene {
 	
 	public Sprite  block;
+	public Sprite  block2;
 	public Sprite  player;
 	public UILayer background;
 	public UILayer foreground;
@@ -28,21 +29,27 @@ public class TestScene extends Scene {
 		game.enableDrawBoundingBoxes(true);
 		
 		block 		= new Block();
+		block2 		= new Block();
 		player 		= new Player(game.getTexture("anim"), 32);
 		background 	= new StaticBackground(game.getTexture("orange"));
 		foreground 	= new StaticForeground(game.getTexture("orange"));
 		
 		//setForeground(foreground);
-		setBackground(background);
+		//setBackground(background);
 
 		add(block);
+		add(block2);
 		add(player);
 		
 		block.setPos(3, 0);
 		block.setSize(2, 3);
 		block.enableDrawBounds();
+		block.enableGravity();
 		
-		player.setSize(4, 1);
+		block2.setPos(-3, -3);
+		block2.setSize(20, 4);
+		
+		player.setSize(1, 1);
 		player.enableDrawBounds();
 		
 		testLeft = new UIButton(game.getTexture("blue"), 0, 0, 100, 500, Anchor.LEFT, new MouseInteactionEvent() {

@@ -20,7 +20,7 @@ public class PhysicsObject {
 	public static final Vector4f COLOR_NO_COLLISION 	= new Vector4f(0, 0, 	1, 1);
 	public static final Vector4f COLOR_COLLISION 		= new Vector4f(1, 0.5f, 0, 1);
 	
-	public static final float 	GRAVITY_ACCELERATION 	= -9.81f;
+	public static final float 	GRAVITY_ACCELERATION 	= -1.0f;//-9.81f;
 	public static final float 	MAX_VELOCITY			= 1.0f;
 	public static final float 	FRICTION				= 0.999999f;
 
@@ -54,8 +54,8 @@ public class PhysicsObject {
 
 	public void update(Game game, Scene scene, double delta)
 	{
-		if(gravityEnabled) 
-			vel.y += GRAVITY_ACCELERATION;
+		if(gravityEnabled)
+			vel.y += GRAVITY_ACCELERATION * delta;
 		
 		pos.x += vel.x;
 		pos.y += vel.y;
