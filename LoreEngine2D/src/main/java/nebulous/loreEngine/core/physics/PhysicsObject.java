@@ -35,9 +35,9 @@ public class PhysicsObject {
 	protected boolean			drawBounds;
 	
 	public PhysicsObject(Vector2f pos, float rot, Vector2f size, boolean gravity) {
-		this.vel 				= new Vector2f(0);
-		this.pos				= new Vector2f(0);
-		this.size				= new Vector2f(1);
+		this.vel 				= new Vector2f(0.0f, 0.0f);
+		this.pos				= new Vector2f(0.0f, 0.0f);
+		this.size				= new Vector2f(1.0f, 1.0f);
 		this.pos.x 				= pos.x;
 		this.pos.y				= pos.y;
 		this.size.x				= size.x;
@@ -49,7 +49,7 @@ public class PhysicsObject {
 	}
 	
 	public PhysicsObject() {
-		this(new Vector2f(0), 0, new Vector2f(1,1), false);
+		this(new Vector2f(0.0f, 0.0f), 0, new Vector2f(1.0f, 1.0f), false);
 	}
 
 	public void update(Game game, Scene scene, double delta)

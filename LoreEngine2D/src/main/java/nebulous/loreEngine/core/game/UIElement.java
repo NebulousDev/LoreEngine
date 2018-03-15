@@ -4,7 +4,7 @@ import lore.math.Vector2f;
 import nebulous.loreEngine.core.graphics.IRenderable;
 import nebulous.loreEngine.core.graphics.Shader;
 
-public abstract class UIElement implements IRenderable, IUpdatable {
+public abstract class UIElement implements IRenderable {
 
 	public static final Shader DEFAULT_UI_SHADER 
 		= Shader.create("default_layer_shader", "shaders/vs_default_ui.glsl", "shaders/fs_default_ui.glsl");
@@ -103,4 +103,7 @@ public abstract class UIElement implements IRenderable, IUpdatable {
 		return new Vector2f(px, py);
 	}
 	
+	public abstract void create(Game game, Scene scene);
+	public abstract void destroy(Game game, Scene scene);
+	public abstract void update(Game game, Scene scene, double delta);
 }

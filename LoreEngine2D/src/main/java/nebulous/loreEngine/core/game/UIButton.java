@@ -79,19 +79,4 @@ public class UIButton extends UIElement {
 		gfx.drawTexturedQuadUI(game.getWindow(), (int)pos.x, (int)pos.y, (int)size.x, (int)size.y, DEFAULT_UI_SHADER, texture);
 	}
 
-	@Override
-	public void tick(Game game, Scene scene, int tick, int tock) { }
-
-	@Override
-	public void onCreate(Game game, Scene scene) { }
-
-	@Override
-	public void onDestroy(Game game, Scene scene) { }
-
-	@Override
-	public void onTick(Game game, Scene scene, int tick, int tock) { }
-
-	@Override
-	public void onUpdate(Game game, Scene scene, double delta) { }
-
 }

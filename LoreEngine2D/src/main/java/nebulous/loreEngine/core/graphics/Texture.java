@@ -95,7 +95,18 @@ public class Texture {
 	}
 	*/
 	
-	public static Texture create(String path){
+	public static Texture create(int id, int width, int height, int channels)
+	{
+		Texture texture 	= new Texture();
+		texture.bufferID 	= id;
+		texture.channels 	= channels;
+		texture.width		= width;
+		texture.height		= height;
+		return texture;
+	}
+	
+	public static Texture create(String path)
+	{
 		
 		boolean successful = true;
 		Texture	texture = new Texture();
@@ -180,6 +191,11 @@ public class Texture {
 
 	public int getChannels() {
 		return channels;
+	}
+	
+	public void release()
+	{
+		GL11.glDeleteTextures(bufferID);
 	}
 
 }
