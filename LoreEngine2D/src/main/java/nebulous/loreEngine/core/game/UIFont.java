@@ -1,12 +1,17 @@
 package nebulous.loreEngine.core.game;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import nebulous.loreEngine.core.graphics.Shader;
 import nebulous.loreEngine.core.graphics.Texture;
 
 class Glyph
@@ -34,22 +39,28 @@ public class UIFont {
 		return font;
 	}
 	
+	private static ArrayList<String> readFile(String path) throws IOException 
+	{
+	  InputStream is = Shader.class.getResourceAsStream(path);
+	  InputStreamReader isr = new InputStreamReader(is);
+	  BufferedReader br = new BufferedReader(isr);
+	  ArrayList<String> lines = new ArrayList<String>();
+	  String line;
+	  while ((line = br.readLine()) != null) lines.add(line);
+	  br.close();
+	  isr.close();
+	  is.close();
+	  return lines;
+	}
+	
 	private static HashMap<Character, Glyph> loadFontMapData(String location) {
 		
 		ArrayList<String> fontData = new ArrayList<String>();
 		HashMap<Character, Glyph> glyphMap = new HashMap<Character, Glyph>();
 		
 		try {
-			Scanner scanner = null;
 			
-			try {
-				scanner = new Scanner(new File(UIFont.class.getResource(location).toURI().getPath()));
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
-			
-			while(scanner.hasNextLine())
-				fontData.add(scanner.nextLine());
+			fontData = readFile("/" + location);
 			
 			for(String s : fontData) {										//FIXME: This is not the best way to do this..
 				if(s.startsWith("char") && !s.startsWith("chars")) {
@@ -68,9 +79,7 @@ public class UIFont {
 				}
 			}
 			
-			scanner.close();
-			
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

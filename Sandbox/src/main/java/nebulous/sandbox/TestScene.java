@@ -10,22 +10,28 @@ import nebulous.loreEngine.core.game.StaticForeground;
 import nebulous.loreEngine.core.game.UIButton;
 import nebulous.loreEngine.core.game.UIElement;
 import nebulous.loreEngine.core.game.UIElement.Anchor;
+import nebulous.loreEngine.core.game.UIFont;
 import nebulous.loreEngine.core.game.UILayer;
+import nebulous.loreEngine.core.game.UIText;
 import nebulous.loreEngine.core.utils.Input;
 
 public class TestScene extends Scene {
 	
-	public Sprite  block;
-	public Sprite  block2;
-	public Sprite  player;
-	public UILayer background;
-	public UILayer foreground;
+	public Sprite  		block;
+	public Sprite  		block2;
+	public Sprite  		player;
+	public UILayer 		background;
+	public UILayer 		foreground;
 	
-	public UIElement testLeft;
-	public UIElement testRight;
+	public UIElement 	testLeft;
+	public UIElement 	testRight;
+	
+	public UIText		text;
+	public UIFont		font;
 	
 	@Override
 	public void onLoad(Game game) {
+		
 		game.enableDrawBoundingBoxes(true);
 		
 		block 		= new Block();
@@ -33,13 +39,16 @@ public class TestScene extends Scene {
 		player 		= new Player(game.getTexture("anim"), 32);
 		background 	= new StaticBackground(game.getTexture("orange"));
 		foreground 	= new StaticForeground(game.getTexture("orange"));
+		font		= UIFont.create("fonts/arial.fnt", "fonts/arial.png");
+		text		= new UIText("Hello World", font , 20, new Vector2f(1.0f, 1.0f), Anchor.CENTER);
 		
 		//setForeground(foreground);
-		//setBackground(background);
+		setBackground(background);
 
 		add(block);
 		add(block2);
 		add(player);
+		add(text);
 		
 		block.setPos(3, 0);
 		block.setSize(2, 3);
