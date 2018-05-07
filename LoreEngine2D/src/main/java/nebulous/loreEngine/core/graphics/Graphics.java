@@ -396,6 +396,23 @@ public class Graphics {
 		if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured in 'drawTexturedQuadUI()': " + err);
 	}
 	
+	public void drawTexturedQuadUI(Window window, int x, int y, int width, int height, int texX, int texY, int texWidth, int texHeight, Shader shader, Texture texture)
+	{
+		shader.bind();
+		GL11.glViewport(x, y, width, height);
+		Primatives.QUAD_UI.bindBuffers();
+		shader.setUniform("model", Matrix4f.Identity());
+		shader.setUniform("texCoords", texX, texY, texWidth, texHeight);
+		texture.bind(0);
+		GL11.glDrawElements(GL11.GL_TRIANGLE_STRIP, Primatives.QUAD_UI.getIbo().size(), GL11.GL_UNSIGNED_INT, 0);
+		texture.unbind();
+		Primatives.QUAD_UI.unbindBuffers();
+		shader.unbind();
+		
+		int err = GL11.glGetError();
+		if(err != 0) Log.println(LogLevel.WARNING, "An unknown OpenGL error occured in 'drawTexturedQuadUI()': " + err);
+	}
+	
 	public void drawLinePerspective(Window window, Camera camera, Matrix4f transform, float x1, float y1, float x2, float y2, Shader shader, Vector4f color)
 	{
 		shader.bind();

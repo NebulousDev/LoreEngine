@@ -16,8 +16,9 @@ import nebulous.loreEngine.core.utils.Log.LogLevel;
 
 public class Texture {
 
-	public static Texture DEFAULT1 = Texture.create("textures/default.png");
-	public static Texture DEFAULT2 = Texture.create("textures/default2.png");
+	public static Texture DEFAULT1 			= Texture.create("textures/default.png");
+	public static Texture DEFAULT2			= Texture.create("textures/default2.png");
+	public static Texture DEFAULT_ANIMATED	= Texture.create("textures/default_animated.png");
 
 	public enum TextureFilter {
 		FILTER_LINEAR, FILTER_NEAREST

@@ -184,6 +184,11 @@ public class Shader {
 	{
 		GL20.glUniform4f(GL20.glGetUniformLocation(programID, uniform), value.x, value.y, value.z, value.w);
 	}
+	
+	public void setUniform(String uniform, float x, float y, float z, float w)
+	{
+		GL20.glUniform4f(GL20.glGetUniformLocation(programID, uniform), x, y, z, w);
+	}
 
 	public void setUniform(String uniform, Matrix4f value)
 	{

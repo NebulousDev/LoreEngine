@@ -40,7 +40,7 @@ public class TestScene extends Scene {
 		background 	= new StaticBackground(game.getTexture("orange"));
 		foreground 	= new StaticForeground(game.getTexture("orange"));
 		font		= UIFont.create("fonts/arial.fnt", "fonts/arial.png");
-		text		= new UIText("Hello World", font , 20, new Vector2f(1.0f, 1.0f), Anchor.CENTER);
+		text		= new UIText("Hello World", font , 20, new Vector2f(1.0f, 1.0f), Anchor.BOTTOM_LEFT);
 		
 		//setForeground(foreground);
 		setBackground(background);
@@ -124,8 +124,8 @@ public class TestScene extends Scene {
 
 		});
 		
-		//add(testLeft);
-		//add(testRight);
+		add(testLeft);
+		add(testRight);
 		getCamera().zoom(-5.0f);
 	}
 

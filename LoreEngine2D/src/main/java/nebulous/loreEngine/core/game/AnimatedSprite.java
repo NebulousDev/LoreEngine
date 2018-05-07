@@ -29,6 +29,11 @@ public abstract class AnimatedSprite extends Sprite {
 		this(texture, offset, DEFAULT_ANIMATED_SPRITE_SHADER);
 	}
 	
+	public AnimatedSprite()
+	{
+		this(Texture.DEFAULT_ANIMATED, 64);
+	}
+	
 	public void setFrame(int frame)
 	{
 		this.frame = frame;
@@ -63,6 +68,11 @@ public abstract class AnimatedSprite extends Sprite {
 	public abstract void onTick(Game game, Scene scene, int tick, int tock);
 	public abstract void onUpdate(Game game, Scene scene, double delta);
 
+	public void setOffset(int offset)
+	{
+		this.offset = offset;
+	}
+	
 	public int getOffset()
 	{
 		return offset;

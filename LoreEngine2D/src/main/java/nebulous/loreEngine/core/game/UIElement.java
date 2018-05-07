@@ -96,6 +96,11 @@ public abstract class UIElement implements IRenderable {
 		}
 	}
 	
+	public Vector2f getAbsolutePosition(Vector2f screen)
+	{
+		return toScreenPos(anchor.ndc, screen);
+	}
+	
 	public Vector2f toScreenPos(Vector2f ndc, Vector2f screen)
 	{
 		int px = (int) (((ndc.x + 1.0f) * (screen.x / 2.0f) + 0) + 0.5f);

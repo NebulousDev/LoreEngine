@@ -1,33 +1,24 @@
 package nebulous.loreEngine.core.game;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
+import lore.math.Vector2f;
+import lore.math.Vector3f;
+import nebulous.loreEngine.core.graphics.GraphicsBuffers.Vertex;
+import nebulous.loreEngine.core.graphics.GraphicsBuffers.VertexBuffer;
 import nebulous.loreEngine.core.graphics.Shader;
 import nebulous.loreEngine.core.graphics.Texture;
 
-class Glyph
-{
-	public int 		id;
-	public int 		x, y;
-	public int 		width, height;
-	public int 		xOffset, yOffset;
-	public int 		xAdvance;
-	public float[] 	texCoords;
-}
-
 public class UIFont {
 	
-	protected Texture 					fontMapTexture;
-	protected HashMap<Character, Glyph> glyphMap;
+	protected Texture 							fontMapTexture;
+	protected HashMap<Character, UIGlyph> 		glyphMap;
+	//protected HashMap<Character, VertexBuffer>	vboMap;
 	
 	private UIFont() {}
 	
@@ -35,7 +26,8 @@ public class UIFont {
 	{
 		UIFont font 		= new UIFont();
 		font.fontMapTexture = Texture.create(fontMapPath);
-		font.glyphMap		= loadFontMapData(fontPath);
+		font.glyphMap		= loadFontMapGlyphData(fontPath);
+		//font.vboMap			= loadFontMapVBOData(font.glyphMap);
 		return font;
 	}
 	
@@ -53,18 +45,18 @@ public class UIFont {
 	  return lines;
 	}
 	
-	private static HashMap<Character, Glyph> loadFontMapData(String location) {
+	private static HashMap<Character, UIGlyph> loadFontMapGlyphData(String location) {
 		
 		ArrayList<String> fontData = new ArrayList<String>();
-		HashMap<Character, Glyph> glyphMap = new HashMap<Character, Glyph>();
+		HashMap<Character, UIGlyph> glyphMap = new HashMap<Character, UIGlyph>();
 		
 		try {
 			
 			fontData = readFile("/" + location);
 			
-			for(String s : fontData) {										//FIXME: This is not the best way to do this..
+			for(String s : fontData) {	//FIXME: This is not the best way to do this..
 				if(s.startsWith("char") && !s.startsWith("chars")) {
-					Glyph glyph = new Glyph();
+					UIGlyph glyph = new UIGlyph();
 					String[] data = s.split("\\s+");
 					glyph.id 		= Integer.parseInt(data[1].split("=")[1]);
 					glyph.x 		= Integer.parseInt(data[2].split("=")[1]);
@@ -86,7 +78,40 @@ public class UIFont {
 		return glyphMap;
 	}
 	
-	public Glyph getGlyph(char character)
+	@Deprecated
+	@SuppressWarnings("unused")
+	private static HashMap<Character, VertexBuffer> loadFontMapVBOData(HashMap<Character, UIGlyph> glyphs)
+	{
+		HashMap<Character, VertexBuffer> vboMap = new HashMap<Character, VertexBuffer>();
+		
+		for(char c : vboMap.keySet())
+		{
+			UIGlyph glyph = glyphs.get(c);
+			
+			Vertex[] verts = 
+			{
+				new Vertex(new Vector3f(0.0f, 			0.0f, 0.0f), 			new Vector2f(glyph.x, 				glyph.y), 					new Vector3f(0.0f, 0.0f, 0.0f)),
+				new Vertex(new Vector3f(glyph.width, 	0.0f, 0.0f), 			new Vector2f(glyph.x + glyph.width, glyph.y), 					new Vector3f(0.0f, 0.0f, 0.0f)),
+				new Vertex(new Vector3f(glyph.width, 	glyph.height, 0.0f), 	new Vector2f(glyph.x + glyph.width, glyph.y + glyph.height), 	new Vector3f(0.0f, 0.0f, 0.0f)),
+				new Vertex(new Vector3f(0.0f, 			glyph.height, 0.0f), 	new Vector2f(glyph.x, 				glyph.y + glyph.height), 	new Vector3f(0.0f, 0.0f, 0.0f))
+			};
+			
+			VertexBuffer charVBO = VertexBuffer.create(verts);
+			
+			vboMap.put(c, charVBO);
+		}
+		
+		return vboMap;
+	}
+
+	/*
+	public VertexBuffer getGlyphVBO(char character)
+	{
+		return vboMap.get(character);
+	}
+	*/
+	
+	public UIGlyph getGlyph(char character)
 	{
 		return glyphMap.get(character);
 	}
