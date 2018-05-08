@@ -119,6 +119,11 @@ public class PhysicsObject {
 		vel.y += deltaY;
 	}
 	
+	public void rotate(float rotation)
+	{
+		rot += rotation;
+	}
+	
 	public static float getGravityAcceleration()
 	{
 		return GRAVITY_ACCELERATION;
@@ -139,6 +144,16 @@ public class PhysicsObject {
 	{
 		pos.x = pos.x;
 		pos.y = pos.y;
+	}
+	
+	public void setRot(float rotation)
+	{
+		rot = rotation;
+	}
+	
+	public float getRot()
+	{
+		return rot;
 	}
 	
 	public Vector2f getPos()

@@ -52,8 +52,8 @@ public abstract class Entity extends PhysicsObject implements IRenderable {
 
 	public Matrix4f getTransform() {
 		return  Matrix4f.Identity().mul(
-				Matrix4f.Rotation(new Vector3f(0.0f, rot, 0.0f)).mul(
 				Matrix4f.Translation(new Vector3f(pos.x - 0.5f, pos.y - 0.5f, 0.0f)).mul(
+				Matrix4f.Rotation(new Vector3f(0.0f, 0.0f, rot)).mul(
 				Matrix4f.Scale(new Vector3f(size.x, size.y, 0.0f)))));
 	}
 	

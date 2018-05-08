@@ -13,6 +13,8 @@ import nebulous.loreEngine.core.utils.Log.LogLevel;
 
 public abstract class Game {
 	
+	public static final int DEFAULT_TICKRATE = 60;
+	
 	public enum State
 	{
 		INITIALIZING,
@@ -34,7 +36,7 @@ public abstract class Game {
 	
 	protected int			activeFPS;
 	protected double		activeMS;
-	protected int			maxTPS = 20;
+	protected int			maxTPS = DEFAULT_TICKRATE;
 	
 	private boolean			drawBoundingBox;
 	

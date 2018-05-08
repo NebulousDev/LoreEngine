@@ -61,6 +61,8 @@ public class TestScene extends Scene {
 		player.setSize(1, 1);
 		player.enableDrawBounds();
 		
+		player.rotate(45.0f);
+		
 		testLeft = new UIButton(game.getTexture("blue"), 0, 0, 100, 500, Anchor.LEFT, new MouseInteactionEvent() {
 			
 			@Override
@@ -138,19 +140,8 @@ public class TestScene extends Scene {
 	@Override
 	public void onTick(Game game, int tick, int tock) {
 		game.getWindow().setTitle("Sandbox | FPS:" + game.getFramerate());
-	}
-	
-	final Vector2f UP 		= new Vector2f( 0,  1);
-	final Vector2f DOWN 	= new Vector2f( 0, -1);
-	final Vector2f LEFT 	= new Vector2f(-1,  0);
-	final Vector2f RIGHT 	= new Vector2f( 1,  0);
-	
-	float cameraSpeed = 5.0f;
-
-	@Override
-	public void onUpdate(Game game, double delta) {
 		
-		float speed = cameraSpeed * (float)delta;
+		float speed = 0.1f;//cameraSpeed * 0.02f;// * (float)delta;
 		
 		if(Input.isKeyHeld(Input.KEY_W))
 		{
@@ -189,6 +180,20 @@ public class TestScene extends Scene {
 		if(Input.isKeyHeld(Input.KEY_RIGHT))
 		{
 		}
+		
+	}
+	
+	final Vector2f UP 		= new Vector2f( 0,  1);
+	final Vector2f DOWN 	= new Vector2f( 0, -1);
+	final Vector2f LEFT 	= new Vector2f(-1,  0);
+	final Vector2f RIGHT 	= new Vector2f( 1,  0);
+	
+	float cameraSpeed = 5.0f;
+
+	@Override
+	public void onUpdate(Game game, double delta) {
+		
+		
 		
 		getCamera().setPos(-player.getPosX(), -player.getPosY());
 	}
