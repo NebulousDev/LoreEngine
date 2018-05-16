@@ -62,7 +62,12 @@ public class Texture {
 		return flipped;
 	}
 
-	public static Texture create(String path) {
+	public static Texture create(String path)
+	{
+		return create(path, false);
+	}
+	
+	public static Texture create(String path, boolean flip) {
 
 		boolean successful = true;
 		Texture texture = new Texture();
@@ -70,7 +75,7 @@ public class Texture {
 
 		try {
 			image = ImageIO.read(Texture.class.getResource("/" + path));
-			//image = flip(image);
+			if(flip) image = flip(image);
 		} catch (Exception e) {
 			Log.println(LogLevel.ERROR, "Failed to locate texture " + path + "! Using DEFAULT texture...");
 			return Texture.DEFAULT1;

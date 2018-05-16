@@ -5,8 +5,13 @@ import nebulous.loreEngine.core.game.Entity;
 import nebulous.loreEngine.core.game.Game;
 import nebulous.loreEngine.core.game.Scene;
 import nebulous.loreEngine.core.game.Sprite;
+import nebulous.loreEngine.core.graphics.Texture;
 
 public class Block extends Sprite {
+	
+	public Block() {
+		super(Texture.DEFAULT1);
+	}
 
 	@Override
 	public void onCreate(Game game, Scene scene) {

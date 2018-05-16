@@ -8,8 +8,8 @@ public abstract class Sprite extends Entity {
 
 	public static final Shader DEFAULT_SPRITE_SHADER 
 		= Shader.create("default_sprite_shader", 
-				"shaders/vs_default.glsl", 
-				"shaders/fs_default.glsl");
+				"shaders/vs_default2.glsl", 
+				"shaders/fs_default2.glsl");
 	
 	protected Texture 	texture;
 	protected Shader	shader;

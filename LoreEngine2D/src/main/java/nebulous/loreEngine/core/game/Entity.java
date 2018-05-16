@@ -25,11 +25,6 @@ public abstract class Entity extends PhysicsObject implements IRenderable {
 	public void tick(Game game, Scene scene, int tick, int tock)
 	{
 		onTick(game, scene, tick, tock);
-	}
-	
-	@Override
-	public void update(Game game, Scene scene, double delta)
-	{
 		for(Entity e : scene.getEntityList())
 		{
 			if(e != this)
@@ -41,7 +36,14 @@ public abstract class Entity extends PhysicsObject implements IRenderable {
 				}
 			}
 		}
+
+	}
+	
+	@Override
+	public void update(Game game, Scene scene, double delta)
+	{
 		super.update(game, scene, delta);
+		onUpdate(game, scene, delta);
 	}
 	
 	public abstract void onCreate(Game game, Scene scene);

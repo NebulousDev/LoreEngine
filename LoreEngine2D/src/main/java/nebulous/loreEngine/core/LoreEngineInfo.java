@@ -2,6 +2,6 @@ package nebulous.loreEngine.core;
 
 public class LoreEngineInfo {
 
-	public static String VERSION = "v0.5.5";
+	public static String VERSION = "v0.5.6";
 	
 }

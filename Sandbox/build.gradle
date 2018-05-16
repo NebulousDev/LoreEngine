@@ -1,11 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'application'
 apply plugin: 'maven'
 
 import org.gradle.internal.os.OperatingSystem
 
 project.ext.lwjglVersion = "3.1.6"
 project.ext.jomlVersion = "1.9.8"
+
+mainClassName = "nebulous.sandbox.Sandbox"
 
 switch ( OperatingSystem.current() ) {
 	case OperatingSystem.WINDOWS:
@@ -22,8 +25,14 @@ switch ( OperatingSystem.current() ) {
 sourceSets {
     main {
         resources {
-            srcDir 'resources' 
+            srcDir 'resources'
         }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'nebulous.sandbox.Sandbox'
     }
 }
 
@@ -36,3 +45,5 @@ dependencies {
 	compile project(":LoreEngine2D");
 	compile 'com.github.NebulousDev:LoreMathLib:1.1.0'
 }
+
+run
