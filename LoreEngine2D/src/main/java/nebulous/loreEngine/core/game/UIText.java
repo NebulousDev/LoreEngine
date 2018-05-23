@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import lore.math.Vector2f;
 import nebulous.loreEngine.core.graphics.Graphics;
 import nebulous.loreEngine.core.graphics.Shader;
+import nebulous.loreEngine.core.graphics.Texture;
 
 public class UIText extends UIElement {
 	
@@ -95,16 +96,20 @@ public class UIText extends UIElement {
 		return invalidated;
 	}
 	
+	static int size = 30;
+	
 	@Override
 	public void draw(Game game, Graphics gfx)
 	{
-		/*
 		for(UIGlyph g : glyphList)
 		{
 			Vector2f pos = getAbsolutePosition(game.getWindow().getSize());
-			gfx.drawTexturedQuadUI(game.getWindow(), (int)pos.x, (int)pos.y, g.width, g.height, g.x, g.y, g.width, g.height, DEFAULT_TEXT_SHADER, font.getFontMapTexture());
+			Texture tex = font.getFontMapTexture();
+			gfx.drawTexturedQuadUI(
+					game.getWindow(), (int)pos.x, (int)pos.y, g.width * size, g.height * size, 
+					g.x / (float)tex.getWidth(), g.y / (float)tex.getHeight(), 
+					g.width / (float)tex.getWidth(), g.height / (float)tex.getHeight(), Sprite.DEFAULT_SPRITE_SHADER, tex);
 		}
-		*/
 	}
 
 }

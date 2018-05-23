@@ -46,4 +46,4 @@ dependencies {
 	compile 'com.github.NebulousDev:LoreMathLib:1.1.0'
 }
 
-run
+run {}

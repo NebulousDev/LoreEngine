@@ -25,7 +25,7 @@ public class UIFont {
 	public static UIFont create(String fontPath, String fontMapPath)
 	{
 		UIFont font 		= new UIFont();
-		font.fontMapTexture = Texture.create(fontMapPath);
+		font.fontMapTexture = Texture.create(fontMapPath, true);
 		font.glyphMap		= loadFontMapGlyphData(fontPath);
 		//font.vboMap			= loadFontMapVBOData(font.glyphMap);
 		return font;

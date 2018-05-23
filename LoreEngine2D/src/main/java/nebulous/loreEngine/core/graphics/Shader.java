@@ -23,6 +23,7 @@ public class Shader {
 	private boolean bound;
 	private String	vertex;
 	private String	fragment;
+	private String	geometry;
 	
 	private int		vertID;
 	private int		fragID;
@@ -86,11 +87,15 @@ public class Shader {
 			} 
 		}
 		
-		Shader shader = new Shader();
-		shader.programID = GL20.glCreateProgram();
+		Shader shader 		= new Shader();
+		shader.programID 	= GL20.glCreateProgram();
 		
-		shader.vertID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
-		shader.fragID = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
+		shader.vertex 		= vertex;
+		shader.fragment 	= fragment;
+		shader.geometry 	= geometry;
+		
+		shader.vertID 		= GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
+		shader.fragID 		= GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
 		
 		if(geometry != null) shader.geomID = GL20.glCreateShader(GL32.GL_GEOMETRY_SHADER);
 		
@@ -220,6 +225,14 @@ public class Shader {
 
 	public int getFragID() {
 		return fragID;
+	}
+
+	public String getGeometry() {
+		return geometry;
+	}
+
+	public int getGeomID() {
+		return geomID;
 	}
 	
 }
